@@ -16,10 +16,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelUtil {
 
-	private static List<String> readRow(Row row) {
-		List<String> values = new ArrayList<>();
-		
-		Iterator<Cell> cellIterator = row.iterator();
+    private static List<String> readRow(Row row) {
+        List<String> values = new ArrayList<>();
+        
+        Iterator<Cell> cellIterator = row.iterator();
         while (cellIterator.hasNext()) {
             Cell cell = cellIterator.next();
             String value = "";
@@ -35,12 +35,12 @@ public class ExcelUtil {
         }
         
         return values;
-	}
-	
-	public static Object[][] readSheet(String filename) {
-		List<Object[]> sheet = new ArrayList<>(); 
-		
-		try {
+    }
+    
+    public static Object[][] readSheet(String filename) {
+        List<Object[]> sheet = new ArrayList<>(); 
+        
+        try {
             FileInputStream excelFile = new FileInputStream(new File(filename));
             Workbook workbook = new XSSFWorkbook(excelFile);
             Sheet datatypeSheet = workbook.getSheetAt(0);
@@ -58,15 +58,15 @@ public class ExcelUtil {
                 sheet.add(rowObj);
             }
             
-    		workbook.close();
+            workbook.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-		
-		// Convert our list of row objects into an object array which is what TestNG requires
-		Object[][] sheetObj = new Object[sheet.size()][];
+        
+        // Convert our list of row objects into an object array which is what TestNG requires
+        Object[][] sheetObj = new Object[sheet.size()][];
         sheetObj = sheet.toArray(sheetObj);
         
         return sheetObj;
-	}
+    }
 }
